@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <style>
+            iframe {
+                border:0;
+                width: 100%;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            window.addEventListener('message', function(e) {
+                console.log('Received event: ' + e.data);
+
+                var $iframe = jQuery("#romisframe");
+                var eventName = e.data[0];
+                if (eventName == 'romis:setHeight'){
+                    $iframe.height(e.data[1]);
+                }
+                else if (eventName == 'romis:scrollToTop'){
+                    var scrolltop = $iframe.offset().top;
+                    $('html, body').animate({scrollTop: scrolltop}, 200);
+                }
+            }, false);
+        </script>
+    </head>
+    <body>
+        <h1>Your web page heading</h1>
+        <p>The web page content</p>
+        <iframe id="romisframe" src="https://romis.no/booking/demo" scrolling="no"></iframe>
+    </body>
+</html>
